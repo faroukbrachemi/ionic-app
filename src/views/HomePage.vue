@@ -24,7 +24,7 @@
         <ion-grid>
           <ion-row>
             <ion-col size="6" v-for="product in featuredProducts" :key="product.id">
-              <ion-card router-link="/product/{{ product.id }}">
+              <ion-card :router-link="`/product/${product.id}`">
                 <img :src="product.image" alt="Product image" />
                 <ion-card-header>
                   <ion-card-title>{{ product.name }}</ion-card-title>

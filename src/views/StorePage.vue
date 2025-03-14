@@ -4,8 +4,9 @@
       <ion-toolbar>
         <ion-title>Store</ion-title>
         <ion-buttons slot="end">
-          <ion-button>
+          <ion-button router-link="/cart">
             <ion-icon slot="icon-only" :icon="cart"></ion-icon>
+            <ion-badge v-if="cartStore.count > 0" color="danger">{{ cartStore.count }}</ion-badge>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -51,10 +52,12 @@
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar,
          IonSegment, IonSegmentButton, IonGrid, IonRow, IonCol, IonCard,
          IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-         IonButton, IonButtons, IonIcon } from '@ionic/vue';
+         IonButton, IonButtons, IonIcon, IonBadge } from '@ionic/vue';
 import { cart } from 'ionicons/icons';
 import { ref, computed } from 'vue';
+import { useCartStore } from '../stores/cart';
 
+const cartStore = useCartStore();
 const searchQuery = ref('');
 const selectedCategory = ref('all');
 

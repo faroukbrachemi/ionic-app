@@ -82,6 +82,19 @@
         <ion-spinner></ion-spinner>
         <p>Loading product details...</p>
       </div>
+      
+      <ion-toast
+        :is-open="showToast"
+        message="Item added to cart"
+        :duration="2000"
+        position="bottom"
+        :buttons="[
+          {
+            text: 'View Cart',
+            handler: () => router.push('/cart')
+          }
+        ]"
+      ></ion-toast>
     </ion-content>
   </ion-page>
 </template>
@@ -89,15 +102,19 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons,
          IonBackButton, IonButton, IonIcon, IonSegment, IonSegmentButton,
-         IonList, IonItem, IonLabel, IonSpinner } from '@ionic/vue';
+         IonList, IonItem, IonLabel, IonSpinner, IonToast } from '@ionic/vue';
 import { star, addCircle, removeCircle } from 'ionicons/icons';
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { useCartStore } from '../stores/cart';
 
 const route = useRoute();
+const router = useRouter();
+const cartStore = useCartStore();
 const productId = Number(route.params.id);
 const quantity = ref(1);
 const selectedTab = ref('details');
+const showToast = ref(false);
 
 // In a real app, this would come from an API
 const product = ref({
@@ -142,8 +159,13 @@ const decrementQuantity = () => {
 };
 
 const addToCart = () => {
-  // In a real app, this would add the product to a cart store
-  alert(`Added ${quantity.value} ${product.value.name} to cart`);
+  cartStore.addItem(product.value, quantity.value);
+  showToast.value = true;
+  
+  // Hide toast after 2 seconds
+  setTimeout(() => {
+    showToast.value = false;
+  }, 2000);
 };
 </script>
 

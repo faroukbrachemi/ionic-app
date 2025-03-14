@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue'
 import StorePage from '../views/StorePage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import ProfilePage from '../views/ProfilePage.vue'
+import CartPage from '../views/CartPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/profile',
     name: 'Profile',
     component: ProfilePage
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: CartPage
   }
 ]
 
