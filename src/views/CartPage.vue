@@ -57,7 +57,7 @@
         </div>
 
         <div class="checkout-buttons">
-          <ion-button expand="block" @click="checkout">
+          <ion-button expand="block" router-link="/checkout">
             Proceed to Checkout
           </ion-button>
           <ion-button expand="block" fill="outline" @click="continueShopping">
@@ -109,10 +109,7 @@ const continueShopping = () => {
   router.push('/store');
 };
 
-const checkout = () => {
-  // In a real app, this would navigate to a checkout page
-  alert('Proceeding to checkout...');
-};
+// Removed the checkout function as we're using router-link now
 </script>
 
 <style scoped>
